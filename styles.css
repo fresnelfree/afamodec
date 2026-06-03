@@ -65,7 +65,7 @@ textarea {
 
 .header-inner {
   width: min(1120px, calc(100% - 48px));
-  height: 52px;
+  height: 82px;
   margin: 0 auto;
   display: flex;
   align-items: center;
@@ -73,10 +73,13 @@ textarea {
 }
 
 .brand {
-  color: var(--green-900);
-  font-size: 17px;
-  font-weight: 800;
-  letter-spacing: 0;
+  display: inline-flex;
+  align-items: center;
+}
+
+.brand img {
+  width: auto;
+  height: 68px;
 }
 
 .site-nav {
@@ -126,7 +129,7 @@ textarea {
   align-items: center;
   background:
     linear-gradient(90deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.5) 42%, rgba(0, 0, 0, 0.18) 100%),
-    url("assets/hero-community.jpg") center 45% / cover no-repeat;
+    url("assets/page_acceuil1.jpeg") center 45% / cover no-repeat;
 }
 
 .hero-content {
@@ -237,7 +240,7 @@ p {
 
 .about-grid {
   display: grid;
-  grid-template-columns: 0.8fr 0.7fr 0.7fr;
+  grid-template-columns: 1fr 1fr 0.8fr;
   gap: 14px;
   align-items: start;
 }
@@ -389,27 +392,40 @@ p {
 }
 
 .team-member {
+  min-width: 0;
   text-align: center;
 }
 
 .avatar {
-  width: 78px;
-  height: 78px;
+  width: 96px;
+  height: 96px;
   display: grid;
   place-items: center;
   margin: 0 auto 14px;
   color: var(--ink);
-  background: #e8ece9;
-  border: 1px solid #b8c2bb;
-  border-radius: 8px;
+  background: #dfe7e1;
+  border: 3px solid var(--white);
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 8px 18px rgba(12, 36, 17, 0.18);
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 
 .team-member h3 {
+  max-width: 100%;
   margin: 0 0 3px;
   color: #18251b;
   font-size: 11px;
   font-weight: 800;
+  line-height: 1.25;
   text-transform: uppercase;
+  overflow-wrap: anywhere;
 }
 
 .team-member p {
@@ -705,13 +721,18 @@ p {
   border-bottom: 1px solid #cfd5d0;
 }
 
-.footer-brand > a,
+.footer-logo,
 .footer-inner h3 {
   display: block;
   margin: 0 0 20px;
   color: var(--green-900);
   font-size: 14px;
   font-weight: 800;
+}
+
+.footer-logo img {
+  width: 150px;
+  height: auto;
 }
 
 .footer-inner p,
@@ -722,9 +743,8 @@ p {
   font-size: 12px;
 }
 
-.footer-brand > a {
+.footer-logo {
   color: var(--green-900);
-  font-size: 14px;
 }
 
 .social-links {
@@ -794,12 +814,13 @@ p {
 
   .header-inner {
     width: 100%;
-    height: 58px;
+    height: 74px;
     padding: 0 18px;
   }
 
-  .brand {
-    font-size: 16px;
+  .brand img {
+    width: auto;
+    height: 60px;
   }
 
   .menu-open {
@@ -905,7 +926,7 @@ p {
     padding: 34px 18px;
     background:
       linear-gradient(90deg, rgba(0, 0, 0, 0.72) 0%, rgba(0, 0, 0, 0.45) 100%),
-      url("assets/hero-community.jpg") center center / cover no-repeat;
+      url("assets/page_acceuil2.jpeg") center center / cover no-repeat;
   }
 
   .hero-content {
@@ -1262,8 +1283,8 @@ p {
     grid-column: 1 / -1;
   }
 
-  .footer-brand > a {
-    font-size: 15px;
+  .footer-logo img {
+    width: 138px;
   }
 
   .footer-inner h3 {
@@ -1278,8 +1299,8 @@ p {
     font-size: 11px;
   }
 
-  .footer-brand > a {
-    font-size: 15px;
+  .footer-logo img {
+    width: 138px;
   }
 
   .newsletter {
