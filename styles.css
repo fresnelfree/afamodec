@@ -210,6 +210,7 @@ textarea {
 .section-inner {
   width: min(1120px, calc(100% - 48px));
   margin: 0 auto;
+  text-align: justify;
 }
 
 h2 {
@@ -230,10 +231,14 @@ p {
   background: var(--white);
 }
 
+.text-justify{
+  text-align: justify;
+}
+
 .about-grid {
   display: grid;
-  grid-template-columns: 1.7fr 0.7fr 0.7fr;
-  gap: 24px;
+  grid-template-columns: 0.8fr 0.7fr 0.7fr;
+  gap: 14px;
   align-items: start;
 }
 
