@@ -14,9 +14,15 @@
         </a>
 
         <input class="nav-toggle" type="checkbox" id="nav-toggle" />
-        <label class="menu-open" for="nav-toggle" aria-label="Ouvrir le menu">
-          <span></span>
-        </label>
+        <div class="header-actions">
+          <div class="language-switcher header-language-switcher" aria-label="Choix de langue">
+            <button class="active" type="button" data-lang-switch="fr">FR</button>
+            <button type="button" data-lang-switch="en">EN</button>
+          </div>
+          <label class="menu-open" for="nav-toggle" aria-label="Ouvrir le menu">
+            <span></span>
+          </label>
+        </div>
 
         <nav class="site-nav" aria-label="Navigation principale">
           <label class="menu-close" for="nav-toggle" aria-label="Fermer le menu">&times;</label>
@@ -26,6 +32,10 @@
           <a href="#publications">Publications</a>
           <a href="#engagement">S'engager</a>
           <a href="#contact">Contact</a>
+          <div class="language-switcher nav-language-switcher" aria-label="Choix de langue">
+            <button class="active" type="button" data-lang-switch="fr">FR</button>
+            <button type="button" data-lang-switch="en">EN</button>
+          </div>
           <a class="nav-action" href="#engagement">S'engager</a>
         </nav>
       </div>
@@ -33,6 +43,17 @@
 
     <main>
       <section class="hero" id="accueil">
+        <div class="hero-slideshow" aria-hidden="true">
+          <div class="hero-track">
+            <figure class="hero-slide">
+              <img src="assets/page_acceuil1.jpeg" alt="" />
+            </figure>
+            <figure class="hero-slide">
+              <img src="assets/page_acceuil2.jpeg" alt="" />
+            </figure>
+          </div>
+        </div>
+
         <div class="hero-content desktop-hero">
           <p class="eyebrow">AFAMODEC</p>
           <h1>Le facilitateur pour une communauté prospère</h1>
@@ -156,8 +177,8 @@
                 </div>
               </article>
 
-              <article class="program-card">
-                <img src="assets/moyens_existence.jpeg" alt="Femmes travaillant ensemble" />
+              <article class="program-card program-card-existence">
+                <img src="assets/moyens_existence.png" alt="Femmes travaillant ensemble" />
                 <div>
                   <span>Autonomisation</span>
                   <h3>Moyens d'existence et autonomisation</h3>
@@ -186,7 +207,7 @@
                 </div>
               </article>
 
-              <article class="program-card program-photo">
+              <article class="program-card program-card-ressources program-photo">
                 <img src="assets/ressources_.jpeg" alt="Forêt tropicale et paysage montagneux" />
               </article>
 
