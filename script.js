@@ -99,6 +99,75 @@
 
   initHeroSlider();
 
+  function initImpactCounters() {
+    const counters = Array.from(document.querySelectorAll(".counter-number"));
+
+    if (!counters.length) {
+      return;
+    }
+
+    function formatCounterValue(value, minDigits) {
+      return String(value).padStart(minDigits, "0");
+    }
+
+    function animateCounter(counter) {
+      if (counter.dataset.counterDone === "true") {
+        return;
+      }
+
+      counter.dataset.counterDone = "true";
+
+      const target = Number(counter.dataset.countTo || 0);
+      const minDigits = Number(counter.dataset.minDigits || 0);
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      if (reduceMotion || target <= 0) {
+        counter.textContent = formatCounterValue(target, minDigits);
+        return;
+      }
+
+      const duration = 1400;
+      const startTime = performance.now();
+
+      function updateCounter(now) {
+        const progress = Math.min((now - startTime) / duration, 1);
+        const easedProgress = 1 - Math.pow(1 - progress, 3);
+        const currentValue = Math.round(target * easedProgress);
+
+        counter.textContent = formatCounterValue(currentValue, minDigits);
+
+        if (progress < 1) {
+          window.requestAnimationFrame(updateCounter);
+        }
+      }
+
+      window.requestAnimationFrame(updateCounter);
+    }
+
+    if (!("IntersectionObserver" in window)) {
+      counters.forEach(animateCounter);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) {
+            return;
+          }
+
+          animateCounter(entry.target);
+          observer.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.35 }
+    );
+
+    counters.forEach(function (counter) {
+      observer.observe(counter);
+    });
+  }
+
   let currentLanguage = "fr";
 
   const englishText = {
@@ -115,6 +184,10 @@
     "Faire un don": "Make a donation",
     "Villages": "Villages",
     "Bénéficiaires": "Beneficiaries",
+    "Plus de": "More than",
+    "Projets réalisés": "completed projects",
+    "Personnes touchées": "people reached",
+    "Localités couvertes": "covered localities",
     "L’AFAMODEC poursuit sur le territoire Camerounais sa mission de mobilisation communautaire et d’aide au développement. Elle bâtit, avec des partenaires locaux et internationaux, un environnement favorable au bien-être des communautés. Les volontaires de l’AFAMODEC ont developpé des compétences reconnues dans la recherche, le renforcement des capacités, l’innovation et la protections des acquis. Les domaines d’interventions majeurs sont : la sécurité alimentaire/nutrition, la santé, l’éducation et la protection de l’enfance, les moyens d’existence et l’autonomisation de la femme, la biodiversité et la gestion des ressources naturelles.": "AFAMODEC carries out its mission of community mobilization and development support across Cameroon. With local and international partners, it builds an environment that supports community well-being. AFAMODEC volunteers have developed recognized expertise in research, capacity building, innovation and the protection of achievements. Its main areas of intervention are food security and nutrition, health, education and child protection, livelihoods and women's empowerment, biodiversity and natural resource management.",
     "Vision": "Vision",
     "Construire des communautés résilientes, solidaires et inclusives où chaque citoyen participe activement au développement durable et au bien-être collectif. Cela passe par le développement des partenariats avec les autorités locales et les organismes internationaux pour aligner nos actions sur les objectifs de développement durable (ODD).": "Build resilient, supportive and inclusive communities where every citizen actively contributes to sustainable development and collective well-being. This includes developing partnerships with local authorities and international organizations to align our actions with the Sustainable Development Goals (SDGs).",
@@ -192,6 +265,8 @@
     "Nom complet": "Full name",
     "Sujet": "Subject",
     "Message": "Message",
+    "Nos partenaires": "Our partners",
+    "Ils nous accompagnent dans nos actions de terrain.": "They support our field actions.",
     "Envoyer via WhatsApp": "Send via WhatsApp",
     "Faciliter la mobilisation et l'engagement pour des communautés camerounaises plus fortes et autonomes.": "Facilitating mobilization and engagement for stronger, more self-reliant Cameroonian communities.",
     "Liens rapides": "Quick links",
@@ -250,7 +325,7 @@
         : "AFAMODEC - Développement communautaire";
 
     document.querySelectorAll("a, h1, h2, h3, p, strong, span, button").forEach((element) => {
-      if (element.children.length > 0 || element.matches("[data-lang-switch]")) {
+      if (element.children.length > 0 || element.matches("[data-lang-switch], .counter-number")) {
         return;
       }
 
@@ -336,6 +411,7 @@
   }
 
   initLanguageSwitcher();
+  initImpactCounters();
 
   const form = document.querySelector("[data-whatsapp-contact]");
 
